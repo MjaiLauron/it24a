@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+    
     <h1>Todo List</h1>
     <input type="text"
             id="taskInput"
@@ -22,10 +23,20 @@ function getTaskText() {
     console.log("The input value is: " + input.value);
     return text;
 }
-    function addTask() {
-        getTaskText();
 
-    }
+function addTask() {
+        const taskText = getTaskText();
+        addTaskItem(taskText);
+}
+
+function addTaskItem(taskText) {
+    const li = document.createElement('li');
+    const taskSpan = document.createElement('span');
+    taskSpan.textContent = taskText;
+    li.appendChild(taskSpan);
+
+    document.getElementById('taskList').appendChild(li);    
+}
 </script>
 
 </body>
