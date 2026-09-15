@@ -13,7 +13,7 @@
             placeholder="Add a task"
     />
     <button onclick="addTask()">Add task</button>
-    <ul id="taskList"></ul> Yor tasks go here ...</ul>
+    <ul id="taskList"><ul> Yor tasks go here ...</ul>
 
 <script>
 function getTaskText() {
@@ -35,7 +35,29 @@ function addTaskItem(taskText) {
     taskSpan.textContent = taskText;
     li.appendChild(taskSpan);
 
-    document.getElementById('taskList').appendChild(li);    
+    document.getElementById('taskList').appendChild(li);   
+    
+    //call createDoneButton function
+    const donBtn = createDoneButton(li);
+    li.appendChild(donBtn);
+
+}
+function createDoneButton(li){
+    const doneBtn = document.createElement("button");
+    doneBtn.textContent = "Done";
+
+    doneBtn.onclick = () => {
+        console.log(li);
+        li.classList.add("done");
+        const butotns = li.querySelectorAll("button");
+
+        butotns.forEach((btn) => {
+            btn.disabled = true;
+        });
+
+        console.log("Task Completed", li.textContent, Data());
+    }
+    return doneBtn;
 }
 </script>
 
