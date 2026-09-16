@@ -41,7 +41,16 @@ function addTaskItem(taskText) {
     const donBtn = createDoneButton(li);
     li.appendChild(donBtn);
 
+    //call createEditButton function
+    const editBtn = createEditButton(li, taskSpan);
+    li.appendChild(editBtn);
+
+        //call createDeleteButton function
+    const deleteBtn = createDeleteButton(li, taskSpan);
+    li.appendChild(deleteBtn);
+
 }
+
 function createDoneButton(li){
     const doneBtn = document.createElement("button");
     doneBtn.textContent = "Done";
@@ -49,9 +58,9 @@ function createDoneButton(li){
     doneBtn.onclick = () => {
         console.log(li);
         li.classList.add("done");
-        const butotns = li.querySelectorAll("button");
+        const buttons = li.querySelectorAll("button");
 
-        butotns.forEach((btn) => {
+        buttons.forEach((btn) => {
             btn.disabled = true;
         });
 
@@ -59,6 +68,42 @@ function createDoneButton(li){
     }
     return doneBtn;
 }
+
+function createEditButton(li){
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.style.marginLeft = "8px";
+    editBtn.onclick = () => handleEditClick(li);
+    return editBtn;
+}
+
+function handleEditClick(li) {
+    const currentText = li.firstChild.textContent.trim();
+    const newText = prompt("Edit your task:", currentText);
+
+    if (newText !== null && newText.trim() !== "") {
+        li.firstChild.textContent = newText.trim();
+        alert("Updated Task");
+    } else {
+        alert ("No Changes Made");
+    }
+
+}
+
+function createDeleteButton(li){
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.style.marginLeft = "8px";
+    deleteBtn.onclick = () => handleDeleteClick(li);
+    return deleteBtn;
+}
+
+function handleDeleteClick(li) {
+    li.remove();
+    alert("Task Deleted");
+}
+
+
 </script>
 
 </body>
